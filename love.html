@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forever ❤️</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(135deg, #ff4e8b, #ff9a9e, #fad0c4);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.container {
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 6vw;
+  margin-bottom: 2vh;
+  text-shadow: 2px 2px 20px #ff2e63;
+}
+
+p {
+  font-size: 4vw;
+  line-height: 1.5;
+  margin-bottom: 3vh;
+}
+
+img {
+  width: 80%;
+  max-width: 300px;
+  border-radius: 25px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  margin-bottom: 3vh;
+}
+
+/* Floating Hearts, Balloons & Fireworks */
+.heart, .balloon, .firework {
+  position: fixed;
+  pointer-events: none;
+}
+
+.heart {
+  font-size: 3vw;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.8;
+}
+
+.balloon {
+  width: 6vw;
+  height: 8vw;
+  border-radius: 50%;
+  animation: balloonUp 12s linear infinite;
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  width: 0.3vw;
+  height: 6vw;
+  background: white;
+  left: 50%;
+  top: 8vw;
+}
+
+.firework {
+  font-size: 2.5vw;
+  animation: burst 3s infinite;
+}
+
+@keyframes floatUp {
+  0% {transform: translateY(100vh); opacity: 0;}
+  50% {opacity:1;}
+  100% {transform: translateY(-10vh); opacity:0;}
+}
+
+@keyframes balloonUp {
+  0% {transform: translateY(100vh);}
+  100% {transform: translateY(-120vh);}
+}
+
+@keyframes burst {
+  0% {opacity:0;}
+  50% {opacity:1;}
+  100% {opacity:0;}
+}
+
+@keyframes fadeOut {
+  0% {opacity:1; transform: scale(1);}
+  100% {opacity:0; transform: scale(2);}
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="page1">
+  <h1>Forever & Always ❤️</h1>
+  <p>
+    From the moment you walked into my life, everything became brighter and more beautiful.  
+    You are my happiness on my worst days, my peace in every storm, and my biggest blessing.  
+    No matter what happens in this world, I promise I will stand beside you, choose you, and love you — every single day.  
+    You are not just my Valentine… you are my forever. ❤️
+  </p>
+  <img src="photo.jpg" alt="Our Memory">
+</div>
+
+<div class="container" id="page2" style="display:none;">
+  <h1>I'm so happy you said YES! 💖</h1>
+  <p>You are my forever, my love. Let’s make every moment unforgettable! ✨</p>
+  <img src="photo.jpg" alt="Our Memory">
+</div>
+
+<audio id="music" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+window.onload = function(){
+  const music = document.getElementById("music");
+  music.play().catch(()=>{}); // may require a tap on iPad
+}
+
+/* Floating Hearts */
+for(let i=0;i<30;i++){
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.animationDuration = (4 + Math.random()*4) + "s";
+  document.body.appendChild(heart);
+}
+
+/* Floating Balloons */
+for(let i=0;i<12;i++){
+  let balloon = document.createElement("div");
+  balloon.className = "balloon";
+  balloon.style.left = Math.random()*100 + "vw";
+  balloon.style.background =
+    ["#ff4e8b","#ff2e63","#ff9a9e","#ff6f91"][Math.floor(Math.random()*4)];
+  balloon.style.animationDuration = (8 + Math.random()*6) + "s";
+  document.body.appendChild(balloon);
+}
+
+/* Fireworks */
+for(let i=0;i<40;i++){
+  let fire = document.createElement("div");
+  fire.className = "firework";
+  fire.innerHTML = "💖";
+  fire.style.left = Math.random()*100 + "vw";
+  fire.style.top = Math.random()*100 + "vh";
+  fire.style.animationDelay = Math.random()*3 + "s";
+  document.body.appendChild(fire);
+}
+
+/* Sparkle on Click */
+document.addEventListener("click", function(e){
+  let sparkle = document.createElement("div");
+  sparkle.innerHTML = "✨";
+  sparkle.style.position = "absolute";
+  sparkle.style.left = e.pageX + "px";
+  sparkle.style.top = e.pageY + "px";
+  sparkle.style.fontSize = "4vw";
+  sparkle.style.animation = "fadeOut 1s forwards";
+  document.body.appendChild(sparkle);
+  setTimeout(()=> sparkle.remove(),1000);
+});
+</script>
+
+</body>
+</html>
